@@ -1,0 +1,7 @@
+html, body {
+    /*여백 x*/
+    margin: 0px;
+    padding: 0px;
+    /*회색*/
+    background-color: rgb(250, 250, 250);
+}
