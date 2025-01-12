@@ -4,7 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
+/*Component는 현재 렌더링할 pages 하위에 있는 컴포넌트들의 목록이다.*/
+/*pageProps는 현재 렌더링할 페이지(Component)가 필요로 하는 초기 데이터다. */
 export default function App({ Component, pageProps }: AppProps) {
+  console.log("Component: ");
+  console.log(Component);
+  console.log("pageProps: ");
+  console.log(pageProps);
+
   const router = useRouter();
 
   const onClickButton = () => {
