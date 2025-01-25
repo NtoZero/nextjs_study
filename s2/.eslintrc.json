@@ -2,6 +2,24 @@
   "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier":
+    ["error",
+      {
+        "endOfLine": "lf",
+        "printWidth": 120,
+        "semi": true,
+        "proseWrap": "preserve",
+        "arrowParens": "always",
+        "no-multiple-empty-lines": ["error", { "max": 2 }] // 최대 2줄 공백 허용
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn", // "warn"으로 설정하면 경고로 처리 (기본값은 "error")
+      {
+        "vars": "all", // 모든 변수를 검사
+        "args": "none", // 함수의 매개변수는 검사하지 않음
+        "ignoreRestSiblings": true // 구조 분해 할당에서 남은 변수 무시
+      }
+    ]
   }
 }
