@@ -8,45 +8,36 @@ import { ReactNode, useEffect } from "react";
 import books from "@/mock/books.json";
 import BookItem from "@/components/book-item";
 import { InferGetServerSidePropsType } from "next";
+import fetchBooks from "@/lib/fetch-books";
+import fetchRandomBooks from "@/lib/fetch-random-books";
 
 /* 컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터 불러오는 함수 */
-export const getServerSideProps = () => {
-  const data = "hello";
+export const getServerSideProps = async () => {
+  // 병렬 적용
+  const [allBooks, recoBooks] = await Promise.all([fetchBooks(), fetchRandomBooks()]);
 
-  // console.log("서버사이드프롭스예요"); // 서버에서만 동작. 브라우저에서 확인 불가.
-  // console.log(window);
-
-  /*
-  주의 사항:
-  1. 단 하나의 객체를 반환해야 한다.
-  2. 객체 내부에 props라는 이름의 프로퍼티를 가지고 있어야 한다.
-  */
   return {
     props: {
-      data,
+      allBooks,
+      recoBooks,
     },
   };
 };
 
-export default function Home({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(data);
-
-  useEffect(() => {
-    /*useEffect를 사용하면 브라우저에 컴포넌트 마운트 이후에만 사용 */
-    console.log(window);
-  }, []);
+export default function Home({ allBooks, recoBooks }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  // console.log(allBooks);
 
   return (
     <div className={style.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
-        {books.map((book) => (
+        {recoBooks.map((book) => (
           <BookItem key={book.id} {...book} />
         ))}
       </section>
       <section>
         <h3>등록된 모든 도서</h3>
-        {books.map((book) => (
+        {allBooks.map((book) => (
           <BookItem key={book.id} {...book} />
         ))}
       </section>
