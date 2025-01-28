@@ -21,7 +21,7 @@ export const getStaticProps = async () => {
       allBooks,
       recoBooks,
     },
-    revalidate: 3,
+    // revalidate: 3, // On-Demand-ISR을 위한 revalidate 옵션 제거
   };
 };
 
