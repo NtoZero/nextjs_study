@@ -3,9 +3,13 @@ import style from "./page.module.css";
 import { BookData } from "@/types";
 
 async function AllBooks() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/book`, {
-    cache: "no-cache",
-  });
+  const response = await fetch(
+    //
+    `${process.env.NEXT_PUBLIC_API_HOST}/book`,
+    {
+      cache: "no-store",
+    }
+  );
   if (!response.ok) {
     return <div> 오류가 발생했습니다... </div>;
   }

@@ -4,14 +4,10 @@ import { BookData } from "@/types";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: {
-    q?: string;
-  };
+  searchParams: Promise<{ q?: string }>;
 }) {
   // `searchParams`가 동기적으로 제공되지 않을 수도 있으므로 안전하게 처리
-  const params = await Promise.resolve(searchParams);
-  const q = params.q || "";
-
+  const { q } = await searchParams;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_HOST}/book/search?q=${q}`
   );
