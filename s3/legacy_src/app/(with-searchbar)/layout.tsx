@@ -1,12 +1,11 @@
 import { ReactNode } from "react";
-import Link from "next/link";
-import SearchBar from "@/app/component/searchbar";
+// import SearchBar from "@/app/component/searchbar";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
       <div>
-        <SearchBar />
+        {/*<SearchBar />*/}
         {children}
       </div>
     </div>
