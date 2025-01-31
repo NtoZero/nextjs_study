@@ -4,7 +4,9 @@ import style from "./layout.module.css";
 import { BookData } from "@/types";
 
 async function Footer() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/book`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/book`, {
+    cache: "force-cache", // 도서가 추가로 등록되지 않을 것이라 가정하고 캐싱 => 풀 라우터 캐시
+  });
 
   if (!response.ok) {
     return <footer>제작 @ststudio</footer>;
