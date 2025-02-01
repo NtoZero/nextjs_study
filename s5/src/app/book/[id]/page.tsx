@@ -1,4 +1,12 @@
 import style from "./page.module.css";
+import { notFound } from "next/navigation";
+
+// export const dynamicParams = false;
+
+// generateStaticParams : App Router에서 정해진 정적 경로를 빌드 타임에 빌드하기 위함.
+export function generateStaticParams() {
+  return [{ id: "1" }, { id: "2" }, { id: "3" }];
+}
 
 export default async function Page({
   params,
@@ -14,6 +22,9 @@ export default async function Page({
   );
 
   if (!response.ok) {
+    if (response.status === 404) {
+      notFound();
+    }
     return <div>오류가 발생하였습니다.</div>;
   }
 
