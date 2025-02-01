@@ -2,6 +2,8 @@ import BookItem from "@/components/book-item";
 import style from "./page.module.css";
 import { BookData } from "@/types";
 
+// export const dynamic = "force-dynamic";
+
 async function AllBooks() {
   const response = await fetch(
     //
