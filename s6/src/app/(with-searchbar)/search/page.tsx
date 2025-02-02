@@ -1,11 +1,14 @@
 import BookItem from "@/components/book-item";
 import { BookData } from "@/types";
+import { delay } from "@/util/delay";
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string }>;
 }) {
+  await delay(1500);
+
   // `searchParams`가 동기적으로 제공되지 않을 수도 있으므로 안전하게 처리
   const { q } = await searchParams;
   const response = await fetch(
