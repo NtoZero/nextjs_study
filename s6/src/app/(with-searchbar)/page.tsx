@@ -32,10 +32,10 @@ async function AllBooks() {
 async function RecoBooks() {
   await delay(3000);
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_HOST}/book/random`,
-    {
+    `${process.env.NEXT_PUBLIC_API_HOST}/book/random`
+    /*{
       next: { revalidate: 3 },
-    }
+    }*/
   );
   if (!response.ok) {
     return <div>오류가 발생했습니다...</div>;
