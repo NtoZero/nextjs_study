@@ -4,7 +4,7 @@ import { delay } from "@/util/delay";
 import { Suspense } from "react";
 import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 
-export async function SearchResult({ q }: { q: string }) {
+async function SearchResult({ q }: { q: string }) {
   await delay(1500);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_HOST}/book/search?q=${q}`,
