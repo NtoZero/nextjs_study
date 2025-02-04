@@ -1,5 +1,5 @@
 "use server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function createReviewAction(formData: FormData) {
   /* 서버 액션 사용*/
@@ -28,7 +28,8 @@ export async function createReviewAction(formData: FormData) {
     });
 
     console.log(`response.status : ${response.status}`);
-    revalidatePath(`/book/${bookId}`);
+    // revalidatePath(`/book/${bookId}`); // 불필요한 캐시 삭제 발생
+    revalidateTag(`review-${bookId}`);
   } catch (err) {
     console.log(err);
     return;

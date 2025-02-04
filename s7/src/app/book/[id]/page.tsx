@@ -44,7 +44,8 @@ async function ReviewList({ bookId }: { bookId: string }) {
   let reviews: ReviewData[];
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_HOST}/review/book/${bookId}`
+      `${process.env.NEXT_PUBLIC_API_HOST}/review/book/${bookId}`,
+      { next: { tags: [`review-${bookId}`] } }
     );
 
     if (!response.ok) {
@@ -74,10 +75,8 @@ export function generateStaticParams() {
 export default async function Page({
   params,
 }: {
-  // ✅ Promise 객체의 제네릭으로 id 감싸기
   params: Promise<{ id: string }>;
 }) {
-  // ✅ params를 await하여 안전하게 처리
   const { id } = await params;
 
   return (
