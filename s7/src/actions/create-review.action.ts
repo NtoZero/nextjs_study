@@ -1,4 +1,6 @@
 "use server";
+import { revalidatePath } from "next/cache";
+
 export async function createReviewAction(formData: FormData) {
   /* 서버 액션 사용*/
 
@@ -26,6 +28,7 @@ export async function createReviewAction(formData: FormData) {
     });
 
     console.log(`response.status : ${response.status}`);
+    revalidatePath(`/book/${bookId}`);
   } catch (err) {
     console.log(err);
     return;
