@@ -102,8 +102,17 @@ async function ReviewList({ bookId }: { bookId: string }) {
 }
 
 // generateStaticParams : App Router에서 정해진 정적 경로를 빌드 타임에 빌드하기 위함.
-export function generateStaticParams() {
-  return [{ id: "1" }, { id: "2" }, { id: "3" }];
+export async function generateStaticParams() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/book`);
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  const books: BookData[] = await response.json();
+
+  return books.map((book) => ({
+    id: book.id.toString(),
+  }));
 }
 
 export default async function Page({
